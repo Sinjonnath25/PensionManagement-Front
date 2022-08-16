@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/internal/operators/map';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +18,14 @@ export class ProcessPensionServiceService {
   
 
 
-  // processPension(data:any) {
-  //   return this.http.post<any>(`${this.baseUrl}/processPension`,  data )
-  //   .pipe(map(response => {
-  //     console.log(response);
-  //     // login successful if there's a jwt token in the response
-      
+  processPension(data:any) {
+    return this.http.post<any>(environment.processPension,  data )
+    .pipe(map(response => {
+      console.log(response);    
 
-  //     return response;
-  //   }));
-  // }
+      return response;
+    }));
+  }
 
   // Method to get pension details
   

@@ -9,12 +9,13 @@
     </div>
     <div class="col-sm">
       <div style="width: 80%;">
-        <form #f="ngForm" >
+        <form #f="ngForm" (ngSubmit)="submit(f)">
              <div class="form-group">
               <br>
               <label for="exampleInputPassword1">Enter Aadhar Number</label>
-              <input  class="form-control" id="exampleInputPassword1" placeholder="12 Digit Aadhar Number">
-            </div>
+              <input required ngModel name="aadharNo" #aadharNo="ngModel" type="text" class="form-control"
+              placeholder="User Name" aria-label="User Name" id="aadharNo">
+             </div>
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

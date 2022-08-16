@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:9003/',
-  register: 'http://localhost:9003/login/register',
-  login: 'http://localhost:9003/login/authenticate',
-  processPension: 'http://localhost:9003/process-pension/'
+  register: 'http://localhost:9003/login/register/',
+  login: 'http://localhost:9003/login/authenticate/',
+  processPension: 'http://localhost:9002/ProcessPension/'
 };
 
 /*

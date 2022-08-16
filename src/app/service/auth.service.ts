@@ -11,10 +11,12 @@ export class AuthService {
   currentUserSubject: any;
   currentUser: any;
   currentUserValue: any;
+  token: any | undefined
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
     this.currentUser = this.currentUserSubject.asObservable();
+    this.token = localStorage.getItem('currentUser')
   }
 
   logout() {
@@ -32,9 +34,11 @@ export class AuthService {
       if(response.status == 500) {
         return response;
       }
-      if (response.data && response.data.token && response.status == 200) {
+      if (response.data && response.status == 200) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(response.data));
+        localStorage.setItem('currentUser', response.data);
+        this.token = localStorage.getItem('currentUser')
+        console.log("Local Storage - "+this.token)
         this.currentUserSubject.next(response.data);
       }
 
@@ -50,13 +54,13 @@ export class AuthService {
       if(response.status == 500) {
         return response;
       }
-      if (response.data && response.data.token && response.status == 200) {
+      if (response.data && response.status == 200) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(response.data));
+        localStorage.setItem('currentUser', response.data);
         this.currentUserSubject.next(response.data);
       }
 
-      return response.data;
+      return response;
     }));
   }
 
