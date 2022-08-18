@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -41,15 +42,16 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         res=>{
           if(res.status==200){
-            alert(res.message)
+            Swal.fire("Done",res.message, 'success');
           }
           else{
-            alert(res.message)
+            Swal.fire("Done",res.message, 'error');
           }
           console.log(res)
         },
         error=>{
           console.log(error)
+          Swal.fire("Done",error, 'error');
         }
       )
     //window.location.reload();

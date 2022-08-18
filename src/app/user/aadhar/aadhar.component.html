@@ -1,11 +1,11 @@
 <div class="container-fluid">
 <router-outlet></router-outlet>
-<h2 align="center">Enter Aadhar Number</h2>
+<h2 align="center">Process Pension</h2>
 <div class="container">
   <div class="row">
     <div class="col-sm">
       <br>
-      <img src="#" class="img-fluid" alt="Responsive image">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-d8GeYWWXVkJV0a3HE_gwQmpjoVDkPLd4rg&usqp=CAU" class="img-fluid" alt="Responsive image">
     </div>
     <div class="col-sm">
       <div style="width: 80%;">
@@ -14,10 +14,11 @@
               <br>
               <label for="exampleInputPassword1">Enter Aadhar Number</label>
               <input required ngModel name="aadharNo" #aadharNo="ngModel" type="text" class="form-control"
-              placeholder="User Name" aria-label="User Name" id="aadharNo">
+              placeholder="User Name" aria-label="Aadhar No" id="aadharNo">
              </div>
             <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Submit</button>&nbsp;
+            <button type="button" onclick="javascript:location.href='dashboard'" class="btn btn-secondary">Back</button>
           </form>
           </div>
     </div>

@@ -7,7 +7,8 @@ export const environment = {
   apiUrl: 'http://localhost:9003/',
   register: 'http://localhost:9003/login/register/',
   login: 'http://localhost:9003/login/authenticate/',
-  processPension: 'http://localhost:9002/ProcessPension/'
+  processPension: 'http://localhost:9002/ProcessPension/',
+  pensionDetails: 'http://localhost:9002/ProcessPension/'
 };
 
 /*

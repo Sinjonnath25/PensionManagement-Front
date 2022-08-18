@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(f:any){
-    console.log(f.value)
+    console.log(f)
     this.registerData = f.value
     this.authenticationService.login(this.registerData)
       .pipe(first())
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         res=>{
           console.log("response is"+res)
           if(res.status==200 && res.data !=null){
-            this.router.navigate(['aadhar']);
+            this.router.navigate(['dashboard']);
             //this.login.loginStatusSubject.next(true);
           }
           else{

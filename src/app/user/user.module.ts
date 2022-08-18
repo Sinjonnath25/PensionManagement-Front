@@ -7,6 +7,7 @@ import { AadharComponent } from './aadhar/aadhar.component';
 import { AmountComponent } from './amount/amount.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     AadharComponent,
     AmountComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

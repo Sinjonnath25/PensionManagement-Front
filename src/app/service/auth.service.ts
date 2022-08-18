@@ -14,15 +14,15 @@ export class AuthService {
   token: any | undefined
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
+    this.currentUserSubject = new BehaviorSubject<any>((localStorage.getItem('currentUser')!));
     this.currentUser = this.currentUserSubject.asObservable();
     this.token = localStorage.getItem('currentUser')
   }
 
   logout() {
     // remove user from local storage to log user out
+    console.log("In logout")
     localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null!);
     return true;
   }
 
@@ -63,5 +63,9 @@ export class AuthService {
       return response;
     }));
   }
+
+  gettoken(){  
+    return !!localStorage.getItem("currentUser");  
+    }  
 
 }

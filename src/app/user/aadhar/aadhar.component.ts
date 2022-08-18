@@ -1,3 +1,4 @@
+import { Pension } from './../../model/pension';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { first, map, Subscriber } from 'rxjs';
@@ -13,13 +14,15 @@ import Swal from 'sweetalert2';
 export class AadharComponent implements OnInit {
 
   aadhar!: String;
+  responseMsg!: string;
+  errMsg!:string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthService,
-    private processPensionServiceService:ProcessPensionServiceService
-    
+    private processPensionServiceService:ProcessPensionServiceService,
+    private pensionDetais:Pension
   ) { }
 
   ngOnInit(): void {
@@ -33,15 +36,19 @@ export class AadharComponent implements OnInit {
       .subscribe(res=>{
           console.log("response is"+res)
           if(res.status==200 && res.data !=null){
-            //this.router.navigate(['aadhar']);
-            //this.login.loginStatusSubject.next(true);
+            console.log(res)
+            this.responseMsg = res.message;
+            this.pensionDetais.aadharNo=res.data.aadharNo;
+            this.pensionDetais.bankServiceCharge=res.data.bankServiceCharge;
+            this.pensionDetais.pensionAmount=res.data.pensionAmount;
+            Swal.fire("Done",this.responseMsg, 'success');
+            console.log(this.pensionDetais)
           }
           else{
-            //alert(res.message)
             console.log(res);
-     //   Swal.fire('Error !!', 'Please Enter correct Details !!', 'error');
+            this.errMsg = res.message;
+            Swal.fire("Oops!",this.errMsg, 'error');
           }
-          console.log(res)
         },
         error=>{
           console.log(error)

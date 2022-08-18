@@ -1,26 +1,30 @@
 <div class="container-fluid">
   <router-outlet></router-outlet>
-  <h2 align="center">Your available Pension Amount</h2>
+  <h2 align="center">Get Pension Details</h2>
   <div class="container">
     <div class="row">
       <div class="col-sm">
         <br>
-        <img src="#" class="img-fluid" alt="Responsive image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-d8GeYWWXVkJV0a3HE_gwQmpjoVDkPLd4rg&usqp=CAU" class="img-fluid" alt="Responsive image">
       </div>
       <div class="col-sm">
         <div style="width: 80%;">
-          <form>
+          <form #f="ngForm" (ngSubmit)="submit(f)">
                <div class="form-group">
                 <br>
-                <label for="exampleInputPassword1">Available Amount</label>
-                <p style="font-size: 32px; font-weight: bold;">
-                  Rs <a>999999</a> /-
-                </p>
-              </div>
+                <label for="exampleInputPassword1">Enter Aadhar Number To See Pension Details</label>
+                <input required ngModel name="aadharNo" #aadharNo="ngModel" type="text" class="form-control"
+                placeholder="User Name" ng-minlength="12" ng-maxlength="12" aria-label="Aadhar No" id="aadharNo" required="true">
+               </div>
               <br>
+              <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Submit</button>&nbsp;
+              <button type="button" onclick="javascript:location.href='dashboard'" class="btn btn-secondary">Back</button>
             </form>
             </div>
       </div>
     </div>
   </div>
+
+  <div class="col d-flex justify-content-center text-success" >{{responseMsg}}</div>
+  <div class="col d-flex justify-content-center text-danger" >{{errMsg}}</div>
   </div>

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AuthService } from './service/auth.service';
 
 @Component({
@@ -6,20 +8,36 @@ import { AuthService } from './service/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent  {
   title = 'pension';
-  authService: AuthService | undefined
-  constructor(authService: AuthService){
-    this.authService = authService
+  authService: AuthService;
+  
+  constructor(private route: ActivatedRoute,
+    private router: Router,authService: AuthService){
+      this.authService = authService;
+  }
+
+  ngOnInit(): void {
+    // get return url from route parameters or default to '/'
+    localStorage.removeItem('currentUser')
+    this.router.navigateByUrl('/register')
+    
   }
 
   logout(){
-    if(this.authService?.logout()){
-      alert("User Logged out");
+    console.log("Inside App comp logout")
+    console.log(this.authService)
+    if(this.authService.logout()){
+      Swal.fire("Done","Logged out successfully", 'success');
     }
     else{
-      alert("Logout Unsuccessfull")
+      Swal.fire("Done","Logout Unsuccessfull", 'error');
     }
   }
+
+  isLoggedIn(){
+    return localStorage.getItem('currentUser')!=null
+  }
+
 
 }

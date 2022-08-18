@@ -1,23 +1,17 @@
 <div>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="padding-left: 10px; padding-right: 10px; ">
-  <a class="navbar-brand" href="#">Pension Management System</a>
+  <a class="navbar-brand" routerLink="dashboard">Pension Management System</a>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink="register">Register</a>
+        <a class="nav-link" routerLink="register" *ngIf="!isLoggedIn()">Register</a>
     </li>
       <li class="nav-item">
-          <a class="nav-link" routerLink="userlogin">Login</a>
+          <a class="nav-link" routerLink="userlogin" *ngIf="!isLoggedIn()">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="userlogin" (click)="logout()">Logout</a>
+        <a class="nav-link" *ngIf="isLoggedIn()" routerLink="userlogin" (click)="logout()">Logout</a>
       </li>
-    <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="aadhar">Aadhar No</a>
-      </li>--> 
-      <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="amount">Available Amount</a>
-      </li> -->
     </ul>
   </div>
 </nav>
@@ -36,7 +30,7 @@
     background-color: rgba(34, 31, 31, 0.751);
     color: aliceblue;
     text-align: center;" >
-      <span>© Pension Management System</span>
+      <span> 2022 © Pension Management System </span>
     </div>
   </footer>
 </div>

@@ -21,7 +21,7 @@
                 <input required ngModel name="password" #password="ngModel" type="password" class="form-control"
         placeholder="User Name" aria-label="User Name" id="password">
             </div>
-            <button [disabled]="loading" class="btn btn-primary col-12 mt-4 border-100">
+            <button [disabled]="!f.valid" class="btn btn-primary col-12 mt-4 border-100">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 Register
             </button>
