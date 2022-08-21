@@ -16,6 +16,9 @@ export class AadharComponent implements OnInit {
   aadhar!: String;
   responseMsg!: string;
   errMsg!:string;
+  load!:string;
+  clicked = false;
+  submitButtonText="Process";
 
   constructor(
     private route: ActivatedRoute,
@@ -29,14 +32,20 @@ export class AadharComponent implements OnInit {
   }
 
   submit(f:any){
-    console.log(f.value)
-    this.aadhar = f.value
+    this.submitButtonText = "Loading...";
+    this.clicked = true;
+    console.log(f.value);
+    this.load="Procesing Penion In Progress...";
+    this.aadhar = f.value;
     this.processPensionServiceService.processPension(this.aadhar)
       .pipe(first())
       .subscribe(res=>{
+        this.submitButtonText = "Process"
+        this.clicked = false;
           console.log("response is"+res)
           if(res.status==200 && res.data !=null){
             console.log(res)
+            this.load="";
             this.responseMsg = res.message;
             this.pensionDetais.aadharNo=res.data.aadharNo;
             this.pensionDetais.bankServiceCharge=res.data.bankServiceCharge;
@@ -46,15 +55,23 @@ export class AadharComponent implements OnInit {
           }
           else{
             console.log(res);
+            this.load="";
             this.errMsg = res.message;
             Swal.fire("Oops!",this.errMsg, 'error');
           }
         },
         error=>{
+          this.clicked = false;
+          this.submitButtonText = "Process"
           console.log(error)
+          Swal.fire("Oops!",error, 'error');
         }
       )
     //window.location.reload();
+  }
+
+  goBack(){
+    this.router.navigateByUrl('dashboard')
   }
 
 }

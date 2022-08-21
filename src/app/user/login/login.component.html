@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <router-outlet></router-outlet>
   <br>
-  <h2 align="center">Enter your User ID and Password</h2>
+  <h2 align="center">Login Here</h2>
   <br>
   <div class="container">
     <div class="row">
@@ -19,11 +19,11 @@
             <div class="form-group mt-2">
                 <label for="password">Password</label>
                 <input required ngModel name="password" #password="ngModel" type="password" class="form-control"
-        placeholder="User Name" aria-label="User Name" id="password">
+        placeholder="Password" aria-label="Password" id="password">
             </div>
-            <button [disabled]="!f.valid" class="btn btn-primary col-12 mt-4 border-100">
+            <button [disabled]="!f.valid || clicked" class="btn btn-primary col-12 mt-4 border-100">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                Login
+                {{loginButtonText}}
             </button>
             <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </form>

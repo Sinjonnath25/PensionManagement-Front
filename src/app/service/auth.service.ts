@@ -50,16 +50,6 @@ export class AuthService {
     return this.http.post<any>(`${environment.register}`, registerData)
     .pipe(map(response => {
       console.log(response);
-      // login successful if there's a jwt token in the response
-      if(response.status == 500) {
-        return response;
-      }
-      if (response.data && response.status == 200) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', response.data);
-        this.currentUserSubject.next(response.data);
-      }
-
       return response;
     }));
   }

@@ -14,9 +14,10 @@ export class LoginComponent implements OnInit {
 
   loading = false;
   submitted = false;
-  returnUrl?: string;
   error = '';
   registerData!: User; 
+  loginButtonText!:string;
+  clicked = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,34 +28,41 @@ export class LoginComponent implements OnInit {
     if (this.authenticationService.currentUserValue) { 
       this.router.navigate(['/']);
     }
+
   }
 
   ngOnInit(): void {
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.loginButtonText="Login";
   }
 
   submit(f:any){
-    console.log(f)
+    console.log(f);
+    this.clicked=true;
+    this.loginButtonText="Logging In...";
     this.registerData = f.value
     this.authenticationService.login(this.registerData)
       .pipe(first())
       .subscribe(
         res=>{
+          this.loginButtonText="Login";
+          this.clicked=false;
           console.log("response is"+res)
           if(res.status==200 && res.data !=null){
             this.router.navigate(['dashboard']);
             //this.login.loginStatusSubject.next(true);
           }
           else{
-            //alert(res.message)
+            this.loginButtonText="Login";
             console.log(res);
         Swal.fire('Error !!', 'Please Enter correct Details !!', 'error');
           }
           console.log(res)
         },
         error=>{
+          this.loginButtonText="Login";
           console.log(error)
+          this.clicked=false;
         }
       )
     //window.location.reload();

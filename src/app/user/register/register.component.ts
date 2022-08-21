@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   returnUrl?: string;
   error = '';
   registerData!: User; 
+  registerButtonText!:string;
+  clicked = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,15 +34,20 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.registerButtonText="Register";
   }
 
   submit(f:any){
+    this.clicked = true;
     console.log(f.value)
+    this.registerButtonText="Registering ...";
     this.registerData = f.value
     this.authenticationService.register(this.registerData)
       .pipe(first())
       .subscribe(
         res=>{
+          this.clicked = false;
+          this.registerButtonText="Register";
           if(res.status==200){
             Swal.fire("Done",res.message, 'success');
           }
@@ -50,6 +57,8 @@ export class RegisterComponent implements OnInit {
           console.log(res)
         },
         error=>{
+          this.clicked = false;
+          this.registerButtonText="Register";
           console.log(error)
           Swal.fire("Done",error, 'error');
         }
